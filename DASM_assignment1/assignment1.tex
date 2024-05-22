@@ -1,0 +1,428 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={DAASM - assignment1},
+  pdfauthor={Nina Dobsa},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{DAASM - assignment1}
+\author{Nina Dobsa}
+\date{2024-04-11}
+
+\begin{document}
+\maketitle
+
+1st assignment, Nairobi weather
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  Retrieve the data from the summary table „Forecast for the next 48
+  hours``. (Weather symbols can be ignored.) Output a table that
+  summarizes this information.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rvest)}
+\FunctionTok{library}\NormalTok{(stringr)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\CommentTok{\#install.packages("kableExtra")  \# If not already installed}
+\FunctionTok{library}\NormalTok{(kableExtra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{html\_w48 }\OtherTok{\textless{}{-}} \FunctionTok{read\_html}\NormalTok{(}\StringTok{"https://www.timeanddate.com/weather/kenya/nairobi"}\NormalTok{) }\CommentTok{\# straching a web page}
+\NormalTok{table\_html }\OtherTok{\textless{}{-}}\NormalTok{ html\_w48 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{html\_elements}\NormalTok{(}\StringTok{\textquotesingle{}\#wt{-}48\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{html\_table}\NormalTok{(}\AttributeTok{header =} \ConstantTok{NA}\NormalTok{) }\CommentTok{\# straching a table from a html document}
+\NormalTok{table\_w48 }\OtherTok{\textless{}{-}}\NormalTok{ table\_html[[}\DecValTok{1}\NormalTok{]]}
+\NormalTok{table\_w48 }\OtherTok{\textless{}{-}}\NormalTok{ table\_w48[}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, ] }\CommentTok{\#deleting row Forecast}
+\NormalTok{table\_w48 }\OtherTok{\textless{}{-}}\NormalTok{ table\_w48[}\SpecialCharTok{{-}}\DecValTok{12}\NormalTok{, ] }\CommentTok{\#deleting the last row with the }
+
+\NormalTok{table\_w48}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 11 x 8
+##    ``           Dienstag Dienstag Mittwoch Mittwoch Mittwoch Mittwoch Donnerstag
+##    <chr>        <chr>    <chr>    <chr>    <chr>    <chr>    <chr>    <chr>     
+##  1 ""           Afterno~ Evening  Night    Morning  Afterno~ Evening  Night     
+##  2 "Temperatur~ 24 °C    20 °C    19 °C    20 °C    22 °C    19 °C    18 °C     
+##  3 ""           A few t~ Thunder~ Rain sh~ Rain sh~ Rain sh~ Rain sh~ Rain show~
+##  4 "Feels Like" 25 °C    20 °C    19 °C    20 °C    23 °C    19 °C    18 °C     
+##  5 "Wind Speed" 8 km/h   6 km/h   1 km/h   4 km/h   13 km/h  5 km/h   4 km/h    
+##  6 "Wind Direc~ SE↑      NNE↑     -        SSW↑     SSW↑     SE↑      N↑        
+##  7 "Humidity"   66%      82%      91%      86%      73%      83%      89%       
+##  8 "Dew Point"  17 °C    17 °C    17 °C    17 °C    17 °C    16 °C    16 °C     
+##  9 "Visibility" 7 km     6 km     6 km     6 km     6 km     6 km     5 km      
+## 10 "Probabilit~ 41%      54%      48%      26%      56%      56%      49%       
+## 11 "Amount of ~ 2.6  mm  5.7  mm  7.1  mm  5.2  mm  4.9  mm  5.5  mm  3.2  mm
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Visualize the predicted development of temperature, wind, and humidity
+  for the next 24 hours (retrieve the data from „Detailed Hourly
+  Forecast - Next 24 hours``). Date \& times should be formatted nicely.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{html\_w24 }\OtherTok{\textless{}{-}} \FunctionTok{read\_html}\NormalTok{(}\StringTok{"https://www.timeanddate.com/weather/kenya/nairobi/hourly"}\NormalTok{)}
+\NormalTok{table\_html }\OtherTok{\textless{}{-}}\NormalTok{ html\_w24 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{html\_elements}\NormalTok{(}\StringTok{\textquotesingle{}\#wt{-}hbh\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{html\_table}\NormalTok{(}\AttributeTok{header =} \ConstantTok{NA}\NormalTok{)}
+\NormalTok{table\_w24 }\OtherTok{\textless{}{-}}\NormalTok{ table\_html[[}\DecValTok{1}\NormalTok{]]}
+
+\NormalTok{new\_colnames }\OtherTok{\textless{}{-}} \FunctionTok{unlist}\NormalTok{(table\_w24[}\DecValTok{1}\NormalTok{,])}
+\FunctionTok{colnames}\NormalTok{(table\_w24) }\OtherTok{\textless{}{-}}\NormalTok{ new\_colnames}
+\NormalTok{table\_w24 }\OtherTok{\textless{}{-}}\NormalTok{ table\_w24[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{] }\CommentTok{\# deleting the column names row and the column with a picture}
+\NormalTok{table\_w24 }\OtherTok{\textless{}{-}}\NormalTok{ table\_w24[}\SpecialCharTok{{-}}\DecValTok{25}\NormalTok{,]}
+
+\CommentTok{\#View(table\_w24)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{check }\OtherTok{=} \DecValTok{0}
+\NormalTok{table\_w24}\SpecialCharTok{$}\NormalTok{DateTime }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\NormalTok{table\_w24}\SpecialCharTok{$}\NormalTok{Date }\OtherTok{\textless{}{-}} \ConstantTok{NA}
+\NormalTok{date\_str }\OtherTok{\textless{}{-}} \FunctionTok{substr}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Time[}\DecValTok{1}\NormalTok{], }\AttributeTok{start=}\DecValTok{6}\NormalTok{, }\AttributeTok{stop=}\FunctionTok{nchar}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Time[}\DecValTok{1}\NormalTok{]))}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(table\_w24)) \{}
+\NormalTok{  time\_str }\OtherTok{\textless{}{-}} \FunctionTok{substr}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Time[i], }\AttributeTok{start=}\DecValTok{1}\NormalTok{, }\AttributeTok{stop=}\DecValTok{5}\NormalTok{)}
+  
+  \ControlFlowTok{if}\NormalTok{ (time\_str }\SpecialCharTok{==} \StringTok{"00:00"}\NormalTok{) \{}
+\NormalTok{    check }\OtherTok{=} \DecValTok{1} \CommentTok{\# Checking if we need to increment time by one day}
+\NormalTok{    date\_str }\OtherTok{\textless{}{-}} \FunctionTok{substr}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Time[i], }\AttributeTok{start=}\DecValTok{6}\NormalTok{, }\AttributeTok{stop=}\FunctionTok{nchar}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Time[i]))}
+\NormalTok{  \}}
+  
+\NormalTok{  time }\OtherTok{\textless{}{-}} \FunctionTok{as.POSIXct}\NormalTok{(time\_str, }\AttributeTok{format =} \StringTok{"\%H:\%M"}\NormalTok{)}
+\NormalTok{  date }\OtherTok{\textless{}{-}}\NormalTok{ date\_str}
+  
+  \ControlFlowTok{if}\NormalTok{ (check }\SpecialCharTok{==} \DecValTok{1}\NormalTok{) \{}
+\NormalTok{    time }\OtherTok{\textless{}{-}}\NormalTok{ time }\SpecialCharTok{+} \DecValTok{86400} \CommentTok{\# Increment date by one day}
+\NormalTok{  \}}
+  
+
+\NormalTok{  table\_w24}\SpecialCharTok{$}\NormalTok{Time[i] }\OtherTok{\textless{}{-}}\NormalTok{ time\_str}
+\NormalTok{  table\_w24}\SpecialCharTok{$}\NormalTok{DateTime[i] }\OtherTok{\textless{}{-}}\NormalTok{ time}
+\NormalTok{  table\_w24}\SpecialCharTok{$}\NormalTok{Date[i] }\OtherTok{\textless{}{-}}\NormalTok{ date\_str}
+\NormalTok{\}}
+
+\NormalTok{table\_w24}\SpecialCharTok{$}\NormalTok{Temp }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Temp, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+"}\NormalTok{))}
+\NormalTok{table\_w24}\SpecialCharTok{$}\NormalTok{Wind }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Wind, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+"}\NormalTok{))}
+\NormalTok{table\_w24}\SpecialCharTok{$}\NormalTok{Amount }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Amount, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.?}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d*"}\NormalTok{))}
+
+\FunctionTok{View}\NormalTok{(table\_w24)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{midnight\_index }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Time }\SpecialCharTok{==} \StringTok{"00:00"}\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(table\_w24, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ DateTime, }\AttributeTok{y =}\NormalTok{ Temp, }\AttributeTok{group =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}  \CommentTok{\# Add a line plot}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Time"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Temperature (°C)"}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# Add axis labels}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"24 hours weather"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =}\NormalTok{ table\_w24}\SpecialCharTok{$}\NormalTok{DateTime, }\AttributeTok{labels =}\NormalTok{ table\_w24}\SpecialCharTok{$}\NormalTok{Time) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{expand =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.15}\NormalTok{, }\FloatTok{0.15}\NormalTok{)) }\SpecialCharTok{+} \CommentTok{\# Expand y{-}axis limits }
+  \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{"text"}\NormalTok{, }\AttributeTok{x =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{y =} \FunctionTok{min}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Temp), }\AttributeTok{label =} \StringTok{"Wind:"}\NormalTok{, }\AttributeTok{vjust =} \FloatTok{1.5}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{"text"}\NormalTok{, }\AttributeTok{x =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{y =} \FunctionTok{min}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Temp), }\AttributeTok{label =} \StringTok{"Rain:"}\NormalTok{, }\AttributeTok{vjust =} \FloatTok{3.5}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{, }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{"text"}\NormalTok{, }\AttributeTok{x =} \SpecialCharTok{{-}}\ConstantTok{Inf}\NormalTok{, }\AttributeTok{y =} \FunctionTok{max}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Temp), }\AttributeTok{label =}\NormalTok{ table\_w24}\SpecialCharTok{$}\NormalTok{Date[}\DecValTok{1}\NormalTok{], }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{annotate}\NormalTok{(}\AttributeTok{geom =} \StringTok{"text"}\NormalTok{, }\AttributeTok{x =}\NormalTok{ table\_w24}\SpecialCharTok{$}\NormalTok{DateTime[}\DecValTok{24}\NormalTok{], }\AttributeTok{y =} \FunctionTok{max}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Temp), }\AttributeTok{label =}\NormalTok{ table\_w24}\SpecialCharTok{$}\NormalTok{Date[}\DecValTok{24}\NormalTok{], }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ Wind), }
+            \AttributeTok{y =} \FunctionTok{min}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Temp), }\AttributeTok{vjust =} \FloatTok{1.5}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ Amount), }
+            \AttributeTok{y =} \FunctionTok{min}\NormalTok{(table\_w24}\SpecialCharTok{$}\NormalTok{Temp), }\AttributeTok{vjust =} \FloatTok{3.5}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{0}\NormalTok{, }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =}\NormalTok{ table\_w24}\SpecialCharTok{$}\NormalTok{DateTime[midnight\_index], }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{color =} \StringTok{"gray"}\NormalTok{, }\AttributeTok{size =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+## i Please use `linewidth` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\includegraphics{assignment1_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Retrieve the monthly annual weather averages from „Climate (Averages)
+  - Annual Weather Averages``. Get the following summary statistics:
+  annual minimum, maximum, mean temperature, annual mean precipitation.
+  Output a table and a plot for the monthly values
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Read the HTML content from the website}
+\NormalTok{html }\OtherTok{\textless{}{-}} \FunctionTok{read\_html}\NormalTok{(}\StringTok{"https://www.timeanddate.com/weather/kenya/nairobi/climate"}\NormalTok{)}
+
+\CommentTok{\# Select all \textless{}p\textgreater{} elements within the specified path}
+\NormalTok{january\_info }\OtherTok{\textless{}{-}}\NormalTok{ html }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"\#climateTable \textgreater{} div.climate{-}month.climate{-}month{-}{-}january \textgreater{} * \textgreater{} p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{()}
+
+\NormalTok{february\_info }\OtherTok{\textless{}{-}}\NormalTok{ html }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"\#climateTable \textgreater{} div.climate{-}month.climate{-}month{-}{-}february \textgreater{} * \textgreater{} p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{()}
+
+\NormalTok{march\_info }\OtherTok{\textless{}{-}}\NormalTok{ html }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"\#climateTable \textgreater{} div.climate{-}month.climate{-}month{-}{-}march \textgreater{} * \textgreater{} p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{()}
+
+\NormalTok{april\_info }\OtherTok{\textless{}{-}}\NormalTok{ html }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"\#climateTable \textgreater{} div.climate{-}month.climate{-}month{-}{-}april \textgreater{} * \textgreater{} p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{()}
+
+\NormalTok{may\_info }\OtherTok{\textless{}{-}}\NormalTok{ html }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"\#climateTable \textgreater{} div.climate{-}month.climate{-}month{-}{-}may \textgreater{} * \textgreater{} p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{()}
+
+\NormalTok{june\_info }\OtherTok{\textless{}{-}}\NormalTok{ html }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"\#climateTable \textgreater{} div.climate{-}month.climate{-}month{-}{-}june \textgreater{} * \textgreater{} p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{()}
+
+\NormalTok{july\_info }\OtherTok{\textless{}{-}}\NormalTok{ html }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"\#climateTable \textgreater{} div.climate{-}month.climate{-}month{-}{-}july \textgreater{} * \textgreater{} p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{()}
+
+\NormalTok{august\_info }\OtherTok{\textless{}{-}}\NormalTok{ html }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"\#climateTable \textgreater{} div.climate{-}month.climate{-}month{-}{-}august \textgreater{} * \textgreater{} p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{()}
+
+\NormalTok{september\_info }\OtherTok{\textless{}{-}}\NormalTok{ html }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"\#climateTable \textgreater{} div.climate{-}month.climate{-}month{-}{-}september \textgreater{} * \textgreater{} p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{()}
+
+\NormalTok{october\_info }\OtherTok{\textless{}{-}}\NormalTok{ html }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"\#climateTable \textgreater{} div.climate{-}month.climate{-}month{-}{-}october \textgreater{} * \textgreater{} p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{()}
+
+\NormalTok{november\_info }\OtherTok{\textless{}{-}}\NormalTok{ html }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"\#climateTable \textgreater{} div.climate{-}month.climate{-}month{-}{-}november \textgreater{} * \textgreater{} p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{()}
+
+\NormalTok{december\_info }\OtherTok{\textless{}{-}}\NormalTok{ html }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_nodes}\NormalTok{(}\StringTok{"\#climateTable \textgreater{} div.climate{-}month.climate{-}month{-}{-}december \textgreater{} * \textgreater{} p"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{html\_text}\NormalTok{()}
+
+\NormalTok{column\_names }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"High Temp"}\NormalTok{, }\StringTok{"Low Temp"}\NormalTok{, }\StringTok{"Mean Temp"}\NormalTok{, }\StringTok{"Precipitation"}\NormalTok{, }\StringTok{"Humidity"}\NormalTok{, }\StringTok{"Dew Point"}\NormalTok{, }\StringTok{"Wind"}\NormalTok{, }\StringTok{"Pressure"}\NormalTok{, }\StringTok{"Visibility"}\NormalTok{)}
+
+\NormalTok{months\_info }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{matrix}\NormalTok{(}\AttributeTok{ncol =} \FunctionTok{length}\NormalTok{(column\_names), }\AttributeTok{nrow =} \DecValTok{12}\NormalTok{))}
+\FunctionTok{colnames}\NormalTok{(months\_info) }\OtherTok{\textless{}{-}}\NormalTok{ column\_names}
+\NormalTok{months\_info[}\DecValTok{1}\NormalTok{, ] }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(january\_info, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.?}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d*"}\NormalTok{))}
+\NormalTok{months\_info[}\DecValTok{2}\NormalTok{, ] }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(february\_info, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.?}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d*"}\NormalTok{))}
+\NormalTok{months\_info[}\DecValTok{3}\NormalTok{, ] }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(march\_info, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.?}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d*"}\NormalTok{))}
+\NormalTok{months\_info[}\DecValTok{4}\NormalTok{, ] }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(april\_info, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.?}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d*"}\NormalTok{))}
+\NormalTok{months\_info[}\DecValTok{5}\NormalTok{, ] }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(may\_info, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.?}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d*"}\NormalTok{))}
+\NormalTok{months\_info[}\DecValTok{6}\NormalTok{, ] }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(june\_info, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.?}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d*"}\NormalTok{))}
+\NormalTok{months\_info[}\DecValTok{7}\NormalTok{, ] }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(july\_info, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.?}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d*"}\NormalTok{))}
+\NormalTok{months\_info[}\DecValTok{8}\NormalTok{, ] }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(august\_info, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.?}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d*"}\NormalTok{))}
+\NormalTok{months\_info[}\DecValTok{9}\NormalTok{, ] }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(september\_info, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.?}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d*"}\NormalTok{))}
+\NormalTok{months\_info[}\DecValTok{10}\NormalTok{, ] }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(october\_info, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.?}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d*"}\NormalTok{))}
+\NormalTok{months\_info[}\DecValTok{11}\NormalTok{, ] }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(november\_info, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.?}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d*"}\NormalTok{))}
+\NormalTok{months\_info[}\DecValTok{12}\NormalTok{, ] }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{str\_extract}\NormalTok{(december\_info, }\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d+}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.?}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{d*"}\NormalTok{))}
+
+\FunctionTok{View}\NormalTok{(months\_info)}
+
+\NormalTok{annual\_minimum }\OtherTok{=} \FunctionTok{min}\NormalTok{(months\_info}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Low Temp}\StringTok{\textasciigrave{}}\NormalTok{)}
+\NormalTok{annual\_maximum }\OtherTok{=} \FunctionTok{max}\NormalTok{(months\_info}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{High Temp}\StringTok{\textasciigrave{}}\NormalTok{)}
+\NormalTok{annual\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(months\_info}\SpecialCharTok{$}\StringTok{\textasciigrave{}}\AttributeTok{Mean Temp}\StringTok{\textasciigrave{}}\NormalTok{)}
+\NormalTok{annual\_mean\_precipitation }\OtherTok{=} \FunctionTok{mean}\NormalTok{(months\_info}\SpecialCharTok{$}\NormalTok{Precipitation)}
+
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Annual minimum of temperatures:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(annual\_minimum, }\DecValTok{2}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Annual minimum of temperatures: 13"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Annual maximum of temperatures:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(annual\_maximum, }\DecValTok{2}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Annual maximum of temperatures: 27"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Annual mean of temperatures:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(annual\_mean, }\DecValTok{2}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Annual mean of temperatures: 19.83"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Annual mean precipitation:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(annual\_mean\_precipitation, }\DecValTok{2}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Annual mean precipitation: 50.52"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{months }\OtherTok{\textless{}{-}}\NormalTok{ month.name[}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(months\_info)]}
+\NormalTok{months }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(months, }\AttributeTok{levels =}\NormalTok{ month.name)}
+
+\CommentTok{\# creating the range plot}
+\FunctionTok{ggplot}\NormalTok{(months\_info, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ months, }\AttributeTok{ymin =} \StringTok{\textasciigrave{}}\AttributeTok{Low Temp}\StringTok{\textasciigrave{}}\NormalTok{, }\AttributeTok{ymax =} \StringTok{\textasciigrave{}}\AttributeTok{High Temp}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_linerange}\NormalTok{(}\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{linewidth =} \FloatTok{1.5}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# Use geom\_linerange instead of geom\_bar}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Month"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Temperature (°C)"}\NormalTok{, }\AttributeTok{title =} \StringTok{"Temperature Range by Month"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()  }\CommentTok{\# Optional: Customize the theme}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assignment1_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# creating the bar chart}
+\FunctionTok{ggplot}\NormalTok{(months\_info, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ months, }\AttributeTok{y =}\NormalTok{ Precipitation)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"skyblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Month"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Precipitation (mm)"}\NormalTok{, }\AttributeTok{title =} \StringTok{"Monthly Precipitation"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{assignment1_files/figure-latex/unnamed-chunk-7-2.pdf}
+
+\end{document}

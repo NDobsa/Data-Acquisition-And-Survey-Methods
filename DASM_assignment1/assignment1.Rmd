@@ -1,0 +1,225 @@
+---
+title: "DAASM - assignment1"
+author: "Nina Dobsa"
+date: "2024-04-11"
+output: html_document
+encoding: "UTF-8"
+---
+1st assignment, Nairobi weather
+
+```{r}
+library(rvest)
+library(stringr)
+library(ggplot2)
+library(knitr)
+library(httr)
+```
+    
+a) Retrieve the data from the summary table „Forecast for the next 48 hours“. (Weather symbols can be ignored.) 
+    Output a table that summarizes this information.
+    
+```{r}
+response <- GET("https://www.timeanddate.com/weather/kenya/nairobi", 
+                add_headers(`Accept-Language` = "en-US,en;q=0.9"))
+html_content <- content(response, as = "text")
+
+# Parse the HTML content
+html_w48 <- read_html(html_content, encoding = "UTF-8")
+table_html <- html_w48 %>% html_elements('#wt-48') %>% html_table(header = NA) # straching a table from a html document
+table_w48 <- table_html[[1]]
+table_w48 <- table_w48[-c(2,13), ] #deleting row Forecast and the last row
+
+kable(table_w48)
+```
+
+b) Visualize the predicted development of temperature, wind, and humidity for the next 24 hours (retrieve the data from „Detailed Hourly Forecast - Next 24 hours“). Date & times should be formatted nicely.
+
+```{r}
+response <- GET("https://www.timeanddate.com/weather/kenya/nairobi/hourly", 
+                add_headers(`Accept-Language` = "en-US,en;q=0.9"))
+
+html_content <- content(response, as = "text")
+html_w24 <- read_html(html_content, encoding = "UTF-8")
+table_html <- html_w24 %>% html_elements('#wt-hbh') %>% html_table(header = NA)
+table_w24 <- table_html[[1]]
+
+new_colnames <- unlist(table_w24[1,])
+colnames(table_w24) <- new_colnames
+table_w24 <- table_w24[-c(1, 26),-2] # deleting the column names row and the column with a picture
+
+kable(table_w24)
+```
+
+```{r}
+check = 0
+table_w24$DateTime <- NA
+table_w24$Date <- NA
+date_str <- substr(table_w24$Time[1], start=6, stop=nchar(table_w24$Time[1]))
+
+for (i in 1:nrow(table_w24)) {
+  time_str <- substr(table_w24$Time[i], start=1, stop=5)
+  
+  if (time_str == "00:00") {
+    check = 1 # Checking if we need to increment time by one day
+    date_str <- substr(table_w24$Time[i], start=6, stop=nchar(table_w24$Time[i]))
+  }
+  
+  time <- as.POSIXct(time_str, format = "%H:%M", tz = "Africa/Nairobi")
+  date <- date_str
+  
+  if (check == 1) {
+    time <- time + 86400 # Increment date by one day
+  }
+  
+
+  table_w24$Time[i] <- time_str
+  table_w24$DateTime[i] <- time
+  table_w24$Date[i] <- date_str
+}
+
+table_w24$Temp <- as.numeric(str_extract(table_w24$Temp, "\\d+"))
+table_w24$Wind <- as.numeric(str_extract(table_w24$Wind, "\\d+"))
+table_w24$Amount <- as.numeric(str_extract(table_w24$Amount, "\\d+\\.?\\d*"))
+
+kable(table_w24)
+
+```
+
+Graphing the table_w24
+
+```{r}
+midnight_index <- which(table_w24$Time == "00:00")
+
+
+ggplot(table_w24, aes(x = DateTime)) +
+  geom_smooth(aes(y = Temp), method = "loess", se = FALSE, color = "yellow") +  # Add a smoothed line plot for temperature
+  geom_bar(aes(y = Amount), stat = "identity", fill = "blue", alpha = 0.5) +  # Add a bar plot for amount
+  labs(x = "Time", y = "Temp (°C)") +  # Add axis labels
+  ggtitle("24 hours weather") +
+  scale_x_continuous(breaks = table_w24$DateTime, labels = table_w24$Time)  +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_y_continuous(expand = c(0.1, 0.1)) +  # Expand y-axis limits 
+  annotate(geom = "text", x = -Inf, y = -Inf, label = "Wind:", vjust = -1, hjust = 0, color = "red", size = 3) +
+  annotate(geom = "text", x = -Inf, y = -Inf, label = "Rain:", vjust = -3.5, hjust = 0, color = "blue", size = 3) +
+  annotate(geom = "text", x = -Inf, y = Inf, label = table_w24$Date[1], vjust = 1.5, hjust = -0.2, color = "black", size = 4) +
+  annotate(geom = "text", x = table_w24$DateTime[24], y = Inf, label = table_w24$Date[24], vjust = 1.5, hjust = 1, color = "black", size = 4) +
+  geom_text(aes(label = Wind), y = -Inf, vjust = -1, hjust = 0, color = "red", size = 3) +  # Position red values above x-axis
+  geom_text(aes(label = Amount), y = -Inf, vjust = -4, hjust = 0.5, color = "black", size = 3) +
+  geom_vline(xintercept = table_w24$DateTime[midnight_index], linetype = "dashed", color = "gray", size = 1)
+```
+
+
+c) Retrieve the monthly annual weather averages from „Climate (Averages) - Annual Weather Averages“. 
+  Get the following summary statistics: annual minimum, maximum, mean temperature, annual mean precipitation.
+  Output a table and a plot for the monthly values
+  
+```{r}
+
+# Read the HTML content from the website
+html <- read_html("https://www.timeanddate.com/weather/kenya/nairobi/climate")
+
+# Select all <p> elements within the specified path
+january_info <- html %>%
+  html_nodes("#climateTable > div.climate-month.climate-month--january > * > p") %>%
+  html_text()
+
+february_info <- html %>%
+  html_nodes("#climateTable > div.climate-month.climate-month--february > * > p") %>%
+  html_text()
+
+march_info <- html %>%
+  html_nodes("#climateTable > div.climate-month.climate-month--march > * > p") %>%
+  html_text()
+
+april_info <- html %>%
+  html_nodes("#climateTable > div.climate-month.climate-month--april > * > p") %>%
+  html_text()
+
+may_info <- html %>%
+  html_nodes("#climateTable > div.climate-month.climate-month--may > * > p") %>%
+  html_text()
+
+june_info <- html %>%
+  html_nodes("#climateTable > div.climate-month.climate-month--june > * > p") %>%
+  html_text()
+
+july_info <- html %>%
+  html_nodes("#climateTable > div.climate-month.climate-month--july > * > p") %>%
+  html_text()
+
+august_info <- html %>%
+  html_nodes("#climateTable > div.climate-month.climate-month--august > * > p") %>%
+  html_text()
+
+september_info <- html %>%
+  html_nodes("#climateTable > div.climate-month.climate-month--september > * > p") %>%
+  html_text()
+
+october_info <- html %>%
+  html_nodes("#climateTable > div.climate-month.climate-month--october > * > p") %>%
+  html_text()
+
+november_info <- html %>%
+  html_nodes("#climateTable > div.climate-month.climate-month--november > * > p") %>%
+  html_text()
+
+december_info <- html %>%
+  html_nodes("#climateTable > div.climate-month.climate-month--december > * > p") %>%
+  html_text()
+
+column_names = c("High Temp", "Low Temp", "Mean Temp", "Precipitation", "Humidity", "Dew Point", "Wind", "Pressure", "Visibility")
+
+months_info <- data.frame(matrix(ncol = length(column_names), nrow = 12))
+colnames(months_info) <- column_names
+months_info[1, ] <- as.numeric(str_extract(january_info, "\\d+\\.?\\d*"))
+months_info[2, ] <- as.numeric(str_extract(february_info, "\\d+\\.?\\d*"))
+months_info[3, ] <- as.numeric(str_extract(march_info, "\\d+\\.?\\d*"))
+months_info[4, ] <- as.numeric(str_extract(april_info, "\\d+\\.?\\d*"))
+months_info[5, ] <- as.numeric(str_extract(may_info, "\\d+\\.?\\d*"))
+months_info[6, ] <- as.numeric(str_extract(june_info, "\\d+\\.?\\d*"))
+months_info[7, ] <- as.numeric(str_extract(july_info, "\\d+\\.?\\d*"))
+months_info[8, ] <- as.numeric(str_extract(august_info, "\\d+\\.?\\d*"))
+months_info[9, ] <- as.numeric(str_extract(september_info, "\\d+\\.?\\d*"))
+months_info[10, ] <- as.numeric(str_extract(october_info, "\\d+\\.?\\d*"))
+months_info[11, ] <- as.numeric(str_extract(november_info, "\\d+\\.?\\d*"))
+months_info[12, ] <- as.numeric(str_extract(december_info, "\\d+\\.?\\d*"))
+
+months_info$Month <- rep(1:12, length.out = 12)
+
+# Reorder columns with 'Month' as the first column
+months_info <- months_info[, c("Month", names(months_info)[-which(names(months_info) == "Month")])]
+
+kable(months_info)
+
+annual_minimum = min(months_info$`Low Temp`)
+annual_maximum = max(months_info$`High Temp`)
+annual_mean = mean(months_info$`Mean Temp`)
+annual_mean_precipitation = mean(months_info$Precipitation)
+
+print(paste("Annual minimum of temperatures:", round(annual_minimum, 2)))
+print(paste("Annual maximum of temperatures:", round(annual_maximum, 2)))
+print(paste("Annual mean of temperatures:", round(annual_mean, 2)))
+print(paste("Annual mean precipitation:", round(annual_mean_precipitation, 2)))
+
+```
+
+Graphing the monthly annual weather
+
+```{r}
+months <- month.name[1:nrow(months_info)]
+months <- factor(months, levels = month.name)
+
+# creating the range plot
+ggplot(months_info, aes(x = months, ymin = `Low Temp`, ymax = `High Temp`)) +
+  geom_linerange(color = "red", linewidth = 1.5) +  # Use geom_linerange instead of geom_bar
+  labs(x = "Month", y = "Temperature(°C)", title = "Temperature Range by Month") +
+  theme_minimal()  # Optional: Customize the theme
+
+# creating the bar chart
+ggplot(months_info, aes(x = months, y = Precipitation)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  labs(x = "Month", y = "Precipitation (mm)", title = "Monthly Precipitation") +
+  theme_minimal()
+
+```
+
